@@ -28,12 +28,12 @@ template<typename T>
 			return Fraction(simplifiedNum, simplifiedDen);
 		}
 		double ToFloat() const {
-			return static_cast<double>(m_numerator) / m_denominator;
+			return static_cast<float>(m_numerator) / m_denominator;
 		}
 
 		T gcd(T a, T b) const {
 			while (b != 0) {
-				T temp = b;
+				int temp = b;
 				b = a % b;
 				a = temp;
 			}
@@ -44,41 +44,41 @@ template<typename T>
 
 		
 
-		Fraction operator + (const Fraction<T>& other) const {
+		Fraction operator + (const Fraction& other) const {
 			return Fraction(m_numerator + other.m_numerator, m_denominator + other.m_denominator);
 		}
-		Fraction operator - (const Fraction<T>& other) const {
+		Fraction operator - (const Fraction& other) const {
 			return Fraction(m_numerator - other.m_numerator, m_denominator - other.m_denominator);
 		}
-		Fraction operator * (const Fraction<T>& other) const {
+		Fraction operator * (const Fraction& other) const {
 			return Fraction(m_numerator * other.m_numerator, m_denominator * other.m_denominator);
 		}
-		Fraction operator / (const Fraction<T>& other) const {
+		Fraction operator / (const Fraction& other) const {
 			return Fraction(m_numerator / other.m_numerator, m_denominator / other.m_denominator);
 		}
 
-		bool operator ==(const Fraction<T>& other) const {
+		bool operator ==(const Fraction& other) const {
 			return m_numerator == other.m_numerator && m_denominator == other.m_denominator;
 		}
 
-		bool operator !=(const Fraction<T>& other) const {
+		bool operator !=(const Fraction& other) const {
 			return !(*this == other); 
 		}
 
-		bool operator <(const Fraction<T>& other) const {
-			return m_numerator * other.m_numerator < other.m_numerator * m_denominator;
+		bool operator <(const Fraction& other) const {
+			return this->ToFloat() < other.ToFloat();
 		}
 
-		bool operator >(const Fraction<T>& other) const {
-			return other < *this; 
+		bool operator >(const Fraction& other) const {
+			return this->ToFloat() > other.ToFloat();
 		}
 
-		bool operator <=(const Fraction<T>& other) const {
-			return !(*this > other); 
+		bool operator <=(const Fraction& other) const {
+			return this->ToFloat() <= other.ToFloat();
 		}
 
-		bool operator >=(const Fraction<T>& other) const {
-			return !(*this < other); 
+		bool operator >=(const Fraction& other) const {
+			return this->ToFloat() >= other.ToFloat();
 		}
 
 
